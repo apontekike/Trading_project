@@ -8,3 +8,5 @@ This project is for creating an automatated stock trading bot to trade with 2 st
 We pool data from yahoo finance and use the ticker from the SP500 and SPMID400, which are in the CSV file Ticker.csv.
 
 The idea is for the bot to make daily paper trades ans test the effiency of the bot
+
+Still a working progress
