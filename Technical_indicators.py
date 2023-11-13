@@ -7,7 +7,6 @@ def money_flow_index(stock,n=14):
     mf_sign = np.where(typical_price > typical_price.shift(1), 1, -1)
     signed_mf = money_flow * mf_sign
 
-    # Calculate gain and loss using vectorized operations
     positive_mf = np.where(signed_mf > 0, signed_mf, 0)
     negative_mf = np.where(signed_mf < 0, -signed_mf, 0)
 
@@ -21,15 +20,11 @@ def get_moving_average(stock,avg):
 
 def get_macd(ticker):
     k = ticker["Close"].ewm(span=12, adjust=False, min_periods=12).mean()
-    # Get the 12-day EMA of the closing price
     d = ticker['Close'].ewm(span=26, adjust=False, min_periods=26).mean()
-    # Subtract the 26-day EMA from the 12-Day EMA to get the MACD
     macd = k - d
-    # Add all of our new values for the MACD to the dataframe
     return macd
 
 def get_aroon(stock, lb=25):
-
     up = 100 * stock.High.rolling(lb + 1).apply(lambda x: x.argmax()) / lb
     dn = 100 * stock.Low.rolling(lb + 1).apply(lambda x: x.argmin()) / lb
     return up,dn
