@@ -33,9 +33,3 @@ def get_aroon(stock, lb=25):
     up = 100 * stock.High.rolling(lb + 1).apply(lambda x: x.argmax()) / lb
     dn = 100 * stock.Low.rolling(lb + 1).apply(lambda x: x.argmin()) / lb
     return up,dn
-
-def price_and_volume(stock):
-    chg = stock["Close"].pct_change
-    print(stock.iloc[1:]["Volume"])
-    x = np.ndarray(chg) * stock.iloc[1:]["Volume"].values
-    return x.cumsum()
